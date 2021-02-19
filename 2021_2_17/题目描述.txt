@@ -1,0 +1,41 @@
+1. 对matrix(list[list[]])实现reshape函数，返回reshape之后的矩阵。matrixReshape(matrix, newRow, newColumn)
+    vector<vector<int>> ans(r, vector<int>(c));
+            for (int x = 0; x < m * n; ++x) {
+                ans[x / c][x % c] = nums[x / n][x % n];
+            }
+    直接预留空间ans，找到ans和nums之间的对应关系即可
+
+2. 实现myAtoi(string s)算法，将字符串转换成一个32位的有符号整数
+    a. 丢弃前面无用的空格
+    b. 检查第一个字符是否为正负号，确定整数的正负号。
+    c. 读入下一个字符直到下一个非数字字符或者字符尾端。忽略其余部分(如果有)
+    d. 转换为数字，如果没有读入数字则为0.
+    e. 缩放到[-2^32, 2^32-1]之间
+#TODO  自动机是什么？
+
+3. 给你n个非负整数，每个数代表坐标中的一个点，在坐标内画n条垂直线。端点分别为(i, ai)和(i, 0)。找出其中的两条线，使得他们于x轴共同构成的容器可以容纳最多的水。
+    解法：使用双指针法，左右指针分别从两端向中间靠拢，当左指针指向的高度大于右指针指向的高度时，移动右指针，否则移动左指针。
+
+4. 数字n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合。
+    解法：使用递归算法generate函数生成所有可能的结果。
+    generate(vector, string, num_of_left, num_of_right, n){
+        结束条件：string.length() == 2 * n;
+            vector.push_back(string);
+        否则递归：
+            当number_of_left < n的时候：
+                string.push_back(left)
+                递归generate(vector, string, num_of_left+1, num_of_right, n)
+                还原原来的string.pop_back()
+            当number_of_right < number_of_left的时候
+                string.push_back(right)
+                递归generate(vector, string, num_of_left, num_of_right + 1, n)
+    }
+
+
+5. 罗马数字包含已下七种字符I, V, X, L, C, D和M，分别代表1，5，10，50，100，500，1000
+    仅有4、9、40、90、400、900在左边表示。给定一个整数，将其转换为罗马数字，其中输入确保在1-3999之间
+    解法：将1， 4， 5， 9， 10， 40， 50， 90， 100， 400， 500， 900， 1000分别对应相应的编码
+         对数字不断取模，相加相应的编码即可。
+
+
+6. 给你一个包含n个整数的数组nums，判断nums中是否存在三个元素a，b，c使得其和等于0？请你找出所有和为0且不重复的三元组。
