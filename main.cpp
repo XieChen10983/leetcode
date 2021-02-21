@@ -1,10 +1,10 @@
 #include <iostream>
-#include "2021_2_19/2021_2_19_11.h"
+#include "2021_2_20/2021_2_20_5.h"
 #include <cctype>
 
 using namespace std;
 
 int main() {
-    convertToTitle(676);
+    cout << hammingWeight(2);
     return 0;
 }

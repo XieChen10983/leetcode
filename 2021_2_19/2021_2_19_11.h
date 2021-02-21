@@ -9,29 +9,20 @@
 #include <cmath>
 using namespace std;
 
-string convertToTitle(int n){
-    int base = 26;
-    int weishu;
-    if (n <= 26)
-        weishu = 1;
-    else{
-        weishu = 2;
-        while (n / base >= 26){
-            base *= 26;
-            weishu++;
-        }
-    }
-    vector<int> v;
-    while (weishu > 0){
-        v.push_back(n / pow(26, weishu - 1));
-        n = n % (int)pow(26, weishu - 1);
-        weishu--;
+/*
+ * 1-A 2-B ... 26-Z, 27-AA 52-AZ  676-ZZ 677-AAA
+ */
+
+string convertToTitle(int n) {
+    string res;
+    while (n > 0) {
+        n -= 1;
+        int rem = n % 26;
+        res = char(rem + 'A') + res;
+        n /= 26;
     }
 
-    for (const auto& ele : v)
-        cout << ele << ", ";
-
-    return "";
+    return res;
 }
 
 #endif //LEETCODE_2021_2_19_11_H
