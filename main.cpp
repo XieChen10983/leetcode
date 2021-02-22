@@ -1,16 +1,14 @@
 #include <iostream>
-#include "2021_2_21/2021_2_21_4.h"
+#include "2021_2_22/2021_2_22_3.h"
 #include <cctype>
 
 using namespace std;
 
 
 int main() {
-//    vector<vector<int>> v = {{1, 2}, {3, 5}, {6, 7}, {8, 10}, {12, 16}};
-    vector<vector<int>> v = {{3, 5}, {12, 15}};
-    printVV(v);
-    vector<int> newinter = {6, 6};
-    vector<vector<int>> out = insert(v, newinter);
-    printVV(out);
+    vector<int> nums = {0, 0, 0, 2, 4, 0, 8, 7, 6, 0, 7, 0, 7, 9, 1, 3, 7, 0, 0};
+    vector<int> nums2 = {2, 3, -2, 4};
+    cout << maxProduct(nums2);
+//    cout << maxProductNoZeros(nums2) << endl;
     return 0;
 }
