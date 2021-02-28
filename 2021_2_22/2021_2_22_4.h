@@ -1,5 +1,5 @@
 //
-// Created by Administrator on 2021/2/22.
+// Created by Laser303 on 2021/2/22.
 //
 
 #ifndef LEETCODE_2021_2_22_4_H
@@ -8,7 +8,7 @@
 #include <vector>
 using namespace std;
 
-string simplifyPath(string path) {
+string simplifyPath(string path){
     string dir;
     vector<string> dirs;
     int index = 0;
@@ -23,13 +23,39 @@ string simplifyPath(string path) {
                 dir += path[index];
                 index++;
             }
-            dirs.push_back(dir);
+            if (dir != ".")
+                dirs.push_back(dir);
         }
     }
-
-    for (const auto& dir_ : dirs)
-        cout << dir_ << endl;
-    return "";
+    // "/home/foo/.ssh/../.ssh2/authorized_keys/"
+    string ans = "/";
+    for (const auto& dir_ : dirs){
+        if (dir_ == ".."){
+            if (ans == "/")
+                continue;
+            else{
+                ans.pop_back();
+                unsigned int t = ans.size() - 1;
+                for (; t >= 0; t--){
+                    if (ans[t] != '/')
+                        continue;
+                    else
+                        break;
+                }
+                ans = ans.substr(0, t + 1);
+                if (ans.empty())
+                    ans = "/";
+            }
+        }
+        else{
+            ans += dir_ + "/";
+        }
+    }
+    if (ans.back() == '/'){
+        if (ans.size() != 1)
+            ans.pop_back();
+    }
+    return ans;
 }
 
 #endif //LEETCODE_2021_2_22_4_H
