@@ -18,16 +18,23 @@ struct ListNode {
 ListNode* reverseBetween(ListNode* head, int left, int right){
     auto* ans = new ListNode(1);
     ans->next = head;
-    auto*
+    auto* copy_ans = ans;
     stack<ListNode*> stk;
     for (int i = 1; i < left; i++)
-        head = head->next;
-    auto* shaobing = head;
+        copy_ans = copy_ans->next;
+    auto* shaobing = copy_ans->next;
     for (int i = left; i < right; i++){
-        stk.push(head);
-        head = head->next;
+        stk.push(shaobing);
+        shaobing = shaobing->next;
     }
-    return ans;
+    copy_ans = ans;
+    while (!stk.empty()){
+        copy_ans->next = stk.top();
+        copy_ans = copy_ans->next;
+        stk.pop();
+    }
+    copy_ans->next = shaobing;
+    return ans->next;
 }
 
 #endif //LEETCODE_2021_3_1_7_H
