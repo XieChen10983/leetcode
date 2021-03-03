@@ -23,11 +23,11 @@ ListNode* reverseBetween(ListNode* head, int left, int right){
     for (int i = 1; i < left; i++)
         copy_ans = copy_ans->next;
     auto* shaobing = copy_ans->next;
-    for (int i = left; i < right; i++){
+    for (int i = left; i <= right; i++){
         stk.push(shaobing);
         shaobing = shaobing->next;
     }
-    copy_ans = ans;
+//    copy_ans = ans->next;
     while (!stk.empty()){
         copy_ans->next = stk.top();
         copy_ans = copy_ans->next;
